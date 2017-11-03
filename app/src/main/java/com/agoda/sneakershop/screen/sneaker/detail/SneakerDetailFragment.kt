@@ -49,8 +49,8 @@ class SneakerDetailFragment : BaseFragment<SneakerDetailViewModel, SneakerDetail
 
     override fun createPresenter(): SneakerDetailContract.Presenter = injectedPresenter
 
-    override fun onViewModelChanged(state: SneakerDetailViewModel) {
-        val (content, loading, error) = state
+    override fun onViewModelChanged(viewModel: SneakerDetailViewModel) {
+        val (content, loading, error) = viewModel
 
         srlSneakerDetail.isRefreshing = loading
 

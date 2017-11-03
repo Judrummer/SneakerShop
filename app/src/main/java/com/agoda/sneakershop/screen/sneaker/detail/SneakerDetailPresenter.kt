@@ -10,19 +10,19 @@ class SneakerDetailPresenter(private val interactor: SneakerDetailInteractor) : 
     override fun defaultViewModel(): SneakerDetailViewModel = SneakerDetailViewModel(null, false, null)
 
     override fun fetchSneakerDetail(id: Long) {
-        viewModel = viewModel.copy(loading = true, error = null)
+        viewModel = viewModel.copy(loading = true)
         disposables += interactor.getSneakerDetail(id).subscribe(
                 { content ->
-                    viewModel = viewModel.copy(loading = false, content = content)
+                    viewModel = viewModel.copy(loading = false, content = content, error = null)
                 },
                 { error ->
-                    viewModel = viewModel.copy(loading = false, error = error)
+                    viewModel = viewModel.copy(loading = false, error = error, content = null)
                 })
 //Use RxJava power
 //        disposables += interactor.getSneakerDetail(id)
-//                .map { viewModel.copy(loading = false, content = it) }
-//                .onErrorReturn { viewModel.copy(loading = false, error = it) }
-//                .startWith(viewModel.copy(loading = true, error = null))
+//                .map { viewModel.copy(loading = false, content = content, error = null) }
+//                .onErrorReturn { viewModel.copy(loading = false, error = error, content = null) }
+//                .startWith(viewModel.copy(loading = true))
 //                .subscribe { viewModel = it }
     }
 

@@ -15,15 +15,15 @@ class SneakerListPresenter(private val sneakerListInteractor: SneakerListInterac
 //        viewModel = viewModel.copy(loading = true, error = null, query = query)
 //
 //        disposables += sneakerListInteractor.getSneakers(query).subscribe({
-//            viewModel = viewModel.copy(items = it, loading = false)
+//            viewModel = viewModel.copy(items = it, error = null, loading = false)
 //        }, {
-//            viewModel = viewModel.copy(error = it, loading = false)
+//            viewModel = viewModel.copy(items = listOf(), error = it, loading = false)
 //        })
 
         disposables += sneakerListInteractor.getSneakers(query)
-                .map { viewModel.copy(items = it, loading = false) }
-                .onErrorReturn { viewModel.copy(error = it, loading = false) }
-                .startWith(viewModel.copy(loading = true, error = null, query = query))
+                .map { viewModel.copy(items = it, error = null, loading = false) }
+                .onErrorReturn { viewModel.copy(items = listOf(), error = it, loading = false) }
+                .startWith(viewModel.copy(loading = true, query = query))
                 .subscribe { viewModel = it }
     }
 

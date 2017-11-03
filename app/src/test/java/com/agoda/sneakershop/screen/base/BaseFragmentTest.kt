@@ -78,7 +78,7 @@ class BaseFragmentTest : BaseAppRobolectricTest() {
 
     class TestableBaseFragment : BaseFragment<TestViewModel, BaseContract.View<TestViewModel>, BaseContract.Presenter<TestViewModel, BaseContract.View<TestViewModel>>>() {
 
-        override fun onViewModelChanged(state: TestViewModel) {
+        override fun onViewModelChanged(viewModel: TestViewModel) {
 
         }
 

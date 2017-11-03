@@ -4,7 +4,7 @@ interface BaseContract {
 
     interface View<in VM> {
 
-        fun onViewModelChanged(state: VM)
+        fun onViewModelChanged(viewModel: VM)
 
     }
 

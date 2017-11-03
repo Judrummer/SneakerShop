@@ -1,5 +1,4 @@
 <resources>
     <string name="app_name">SneakerShop</string>
-    <string name="sneaker_list_empty_message">Not Found Sneakers Sneakers</string>
     <string name="sneaker_list_error_message">Error : \"%s\"</string>
 </resources>

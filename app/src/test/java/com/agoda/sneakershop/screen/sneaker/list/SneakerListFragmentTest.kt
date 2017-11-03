@@ -152,7 +152,7 @@ class SneakerListFragmentTest : BaseAppRobolectricTest() {
     }
 
     @Test
-    fun onViewModelChanged_containError_then_showError() {
+    fun onViewModelChanged_containError_then_showError_hideList() {
         initialFragment(fragment)
         val errorMessage = "Message"
         val viewModel = SneakerListViewModel(items = listOf(), error = Throwable(errorMessage), loading = false, query = "")
@@ -164,44 +164,13 @@ class SneakerListFragmentTest : BaseAppRobolectricTest() {
     }
 
     @Test
-    fun onViewModelChanged_noError_then_hideError() {
+    fun onViewModelChanged_noError_then_hideError_showList() {
         initialFragment(fragment)
         val viewModel = SneakerListViewModel(items = listOf(), error = null, loading = false, query = "")
 
         fragment.onViewModelChanged(viewModel)
 
         fragment.tvError.visibility shouldEqual View.GONE
-    }
-
-    @Test
-    fun onViewModelChanged_noItems_then_showEmpty() {
-        initialFragment(fragment)
-        val viewModel = SneakerListViewModel(items = listOf(), error = null, loading = false, query = "")
-
-        fragment.onViewModelChanged(viewModel)
-
-        fragment.tvEmpty.visibility shouldEqual View.VISIBLE
-    }
-
-    @Test
-    fun onViewModelChanged_containItems_then_hideEmpty() {
-        initialFragment(fragment)
-        val viewModel = SneakerListViewModel(items = listOf(SneakerListItemViewModel(0L, "", "", "", 0.0, "")),
-                error = null, loading = false, query = "")
-
-        fragment.onViewModelChanged(viewModel)
-
-        fragment.tvEmpty.visibility shouldEqual View.GONE
-    }
-
-    @Test
-    fun onViewModelChanged_containError_then_hideEmpty() {
-        initialFragment(fragment)
-        val viewModel = SneakerListViewModel(items = listOf(), error = Throwable(""), loading = false, query = "")
-
-        fragment.onViewModelChanged(viewModel)
-
-        fragment.tvEmpty.visibility shouldEqual View.GONE
     }
 
 }

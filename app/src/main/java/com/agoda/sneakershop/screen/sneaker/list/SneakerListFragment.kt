@@ -72,23 +72,19 @@ class SneakerListFragment :
         }
     }
 
-    override fun onViewModelChanged(state: SneakerListViewModel) {
-        srlSneakerList.isRefreshing = state.loading
+    override fun onViewModelChanged(viewModel: SneakerListViewModel) {
+        val (items, loading, error) = viewModel
 
-        state.error?.let {
-            tvError.text = getString(R.string.sneaker_list_error_message, it.message ?: "")
+        srlSneakerList.isRefreshing = loading
+
+        if (error != null) {
+            tvError.text = getString(R.string.sneaker_list_error_message, error.message ?: "")
             tvError.visibility = View.VISIBLE
-        } ?: {
-            tvError.visibility = View.GONE
-        }()
-
-        if (state.error == null && state.items.isEmpty() && state.loading.not()) {
-            tvEmpty.visibility = View.VISIBLE
         } else {
-            tvEmpty.visibility = View.GONE
+            tvError.visibility = View.GONE
         }
 
-        sneakerListAdapter.items = state.items
+        sneakerListAdapter.items = items
     }
 
     override fun onBackPressed(): Boolean =
