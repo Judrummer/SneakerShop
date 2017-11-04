@@ -6,3 +6,8 @@ import org.junit.Assert
 infix fun Any?.shouldEqual(expected: Any?) {
     Assert.assertEquals(expected, this)
 }
+
+fun test(){
+    "10".shouldEqual("10")
+    "10" shouldEqual "10"
+}
