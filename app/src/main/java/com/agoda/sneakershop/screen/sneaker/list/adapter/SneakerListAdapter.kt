@@ -34,7 +34,7 @@ open class SneakerListAdapter : RecyclerView.Adapter<SneakerListViewHolder>() {
         fun onItemClick(position: Int)
     }
 
-    open var items by Delegates.observable(listOf<SneakerListItemViewModel>()) { props, oldValue, newValue ->
+    open var items by Delegates.observable(listOf<SneakerListItemViewModel>()) { _, oldValue, newValue ->
         DiffUtil.calculateDiff(SneakerListDiffUtilCallback(oldValue, newValue)).dispatchUpdatesTo(this)
     }
 
